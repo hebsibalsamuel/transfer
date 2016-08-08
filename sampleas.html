@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html ng-app="app1">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="a2.js"></script>
+    <style media="screen">
+
+    </style>
+  </head>
+  <body>
+    <div ng-controller="ctrl1">
+      <h1>CHICAGO CRIME DATA</h1>
+      <span>SELECT YEAR:
+         <!-- <select ng-model="year_data">
+        <option ng-repeat="x in full_data" value="{{x.yr}}">{{x.yr}}</option>
+        </select> -->
+        <select ng-model="year_data" ng-options="x.yr for x in full_data">
+    </select>
+
+              {{year_data.above500}}
+      </span>
+
+      <p>
+        <span>FILTER THE CONTENT:
+           <select ng-model="filter_value">
+          <option ng-repeat="y in filter_contents" value="{{y}}">{{y}}</option>
+          </select>
+
+        </span>
+
+      </p>
+      <form name="myForm" >
+      <span>ENTER A VALUE</span>
+      <input type="text" name="fName" ng-model="value"
+         ng-required="true" ng-minlength="4" />
+
+         <!-- $dirty is set to true if a user interacts with a element and then we check if the elements required field is true -->
+         <span class="error-message" ng-show="myForm.fName.$dirty
+         && myForm.fName.$error.required">Must Enter a value
+         </span>
+
+         <!-- Check if the element has been edited and whether it contains at least 2 characters -->
+         <span class="error-message" ng-show="myForm.fName.$dirty
+           && myForm.fName.$error.minlength">Must be a Minimum of 4 Characters</span>
+
+
+
+      </form>
+
+      <p>
+        <span>SORT BY:
+           <select ng-model="sort_value">
+          <option ng-repeat="z in sort_by" value="{{z}}">{{z}}</option>
+          </select>
+        </span>
+
+      </p>
+      <table>
+        <tr>
+          <th>  Year   </th>
+            <th>Under500     </th>
+              <th> Above500    </th>
+        </tr>
+    <tr ng-repeat="x in full_data|filter:year_data">
+      <td>{{ x.yr }}</td>
+      <td>{{ x.under500 }}</td>
+        <td>{{ x.above500 }}</td>
+    </tr>
+  </table>
+
+<!-- {{full_data.length}} -->
+<div>
+  <span ng-repeat="x in full_data">
+  <button type="button" name="button">1</button>
+  </span>
+</div>
+
+
+    </div>
+
+  </body>
+</html>
